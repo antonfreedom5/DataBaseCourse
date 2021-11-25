@@ -2,25 +2,27 @@ package com.example.test.service;
 
 import com.example.test.entity.Clazz;
 import com.example.test.repository.ClazzRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ClazzService {
-    private ClazzRepository clazzRepository;
-
-    @Autowired
-    public ClazzService(ClazzRepository clazzRepository) {
-        this.clazzRepository = clazzRepository;
-    }
+    private final ClazzRepository clazzRepository;
 
     public void add(String name) {
-        Clazz clazz = new Clazz();
+        Clazz clazz = clazzRepository.findByName(name).orElse(new Clazz());
         clazz.setName(name);
+
         clazzRepository.save(clazz);
+    }
+
+    public Optional<Clazz> getByName(String name) {
+        return clazzRepository.findByName(name);
     }
 
     public List<String> getAll() {
