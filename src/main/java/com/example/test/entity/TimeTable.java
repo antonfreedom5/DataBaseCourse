@@ -1,14 +1,17 @@
 package com.example.test.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.sql.Date;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
+
 @Entity
+@Data
 public class TimeTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Date day;
     @OneToMany

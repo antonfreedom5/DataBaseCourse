@@ -1,14 +1,15 @@
 package com.example.test.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 public class Statistics {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Integer firstGuarter;
     private Integer secondGuarter;
