@@ -12,15 +12,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/item")
 public class ItemController {
-    private ItemService itemService;
+    private final ItemService itemService;
 
     @Autowired
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
     }
     @GetMapping("/add")
-    public String addItem(@RequestParam String name) {
-        itemService.add(name);
+    public String addItem(@RequestParam String itemName,
+                          @RequestParam String educatorName) {
+        itemService.add(itemName, educatorName);
         return "Предмет успешно создан!";
     }
 

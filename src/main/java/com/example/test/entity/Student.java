@@ -19,5 +19,6 @@ public class Student {
     private String phone;
     @OneToMany
     private List<Score> scores;
-
+    @OneToOne
+    private State state;
 }

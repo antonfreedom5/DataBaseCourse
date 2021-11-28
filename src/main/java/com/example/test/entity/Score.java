@@ -3,7 +3,6 @@ package com.example.test.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -12,6 +11,6 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Long value;
-    @ManyToMany
-    private List<Item> items;
+    @OneToOne
+    private Item item;
 }
