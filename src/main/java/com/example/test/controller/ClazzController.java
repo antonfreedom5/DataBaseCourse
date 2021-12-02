@@ -1,32 +1,40 @@
 package com.example.test.controller;
 
 import com.example.test.service.ClazzService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RequestMapping("/clazz")
 @RestController
+@RequiredArgsConstructor
 public class ClazzController {
-    private ClazzService clazzService;
+    private final ClazzService clazzService;
 
-    @Autowired
-    public ClazzController(ClazzService clazzService) {
-        this.clazzService = clazzService;
+    @GetMapping()
+    public String clazzHome() {
+        return "<a href='http://localhost:8080/clazz/addForm'>Создать класс</a></br>" +
+                "<a href='http://localhost:8080/clazz/getAll'>Показать все классы</a>";
+    }
+
+    @GetMapping("/addForm")
+    public String addClazzForm() {
+        return "<form action='http://localhost:8080/clazz/add'>" +
+                "Название класса: <input type='text' name='clazzName'/></br>" +
+                "<button type='submit'>Создать</button>" +
+                "</form>";
     }
 
     @GetMapping("/add")
-    public String addClazz(@RequestParam String name) {
-        clazzService.add(name);
+    public String addClazz(@RequestParam String clazzName) {
+        clazzService.add(clazzName);
         return "Класс успешно создан!";
     }
 
     @GetMapping("/getAll")
-    public List<String> getAll() {
-        return clazzService.getAll();
+    public String getAll() {
+        return "<a href='http://localhost:8080/'>На главную</a></br>" + clazzService.getAll().toString();
     }
 }

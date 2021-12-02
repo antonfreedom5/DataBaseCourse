@@ -1,7 +1,7 @@
 package com.example.test.controller;
 
 import com.example.test.service.StatisticsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,13 +11,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/statistics")
+@RequiredArgsConstructor
 public class StatisticsController {
-    private StatisticsService statisticsService;
-
-    @Autowired
-    public StatisticsController(StatisticsService statisticsService) {
-        this.statisticsService = statisticsService;
-    }
+    private final StatisticsService statisticsService;
 
     @GetMapping("/add")
     public String addStatistics(@RequestParam Integer firstGuarter) {

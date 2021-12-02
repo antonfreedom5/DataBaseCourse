@@ -1,7 +1,7 @@
 package com.example.test.controller;
 
 import com.example.test.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+@RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
 
-    @Autowired
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
-    }
     @GetMapping("/add")
     public String addItem(@RequestParam String itemName,
                           @RequestParam String educatorName) {
